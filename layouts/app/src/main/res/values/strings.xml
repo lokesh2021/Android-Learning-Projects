@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">layouts</string>
+    <string name="lokesh_bm">Lokesh B M</string>
+    <string name="bio">Highly organized and detail-oriented Final Year Engineering student who is a Self-taught Android App Developer (Native), Flutter Developer (Hybrid), UI | UX Designer and knows Data science.
+        \n\n 🔭 I\’m currently working on a Mobile Application based on AI Short News App which is available at PlayStore
+        \n\n 🌱 While doing the above work, I\'m simultaneously getting comfortable with Data Structures and Algorithms concepts
+        \n\n👨‍💻 My Personal Portfolio is available at https://lokesh2021.github.io
+        \n\n💬 Ask me about Kotlin, Dart, Java, Android, Flutter,Data Structures and Algorithms
+        \n\n📫 Feel free to reach me at lokeshbandi2021@gmail.com
+        \n\n⚡ Fun fact - I\'m a big Apple Fan but can\'t afford any of their products 😅😢</string>
+    <string name="what_is_your_nickname">What is your Nickname</string>
+    <string name="done">Done</string>
+</resources>
