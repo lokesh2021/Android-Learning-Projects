@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/roboto"
-        android:text="How to Play"
+        android:text="How to Play?"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/info_text"
         app:layout_constraintStart_toStartOf="parent" />
