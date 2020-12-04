@@ -9,7 +9,7 @@ import org.w3c.dom.Text
 
 class NewsListAdapter(val items: ArrayList<String>) : RecyclerView.Adapter<NewsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        TODO("Not yet implemented")
+        
     }
 
     override fun getItemCount(): Int {
