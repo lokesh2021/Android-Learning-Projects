@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Remote Access</string>
+    <string name="set_access_key">Set Access Key</string>
+    <string name="enter_new_access_key">Enter New Access Key</string>
+</resources>
