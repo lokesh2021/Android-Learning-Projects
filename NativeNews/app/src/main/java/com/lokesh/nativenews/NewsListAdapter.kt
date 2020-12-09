@@ -1,5 +1,6 @@
 package com.lokesh.nativenews
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
@@ -7,9 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
-class NewsListAdapter(val items: ArrayList<String>) : RecyclerView.Adapter<NewsViewHolder>() {
+class NewsListAdapter(private val items: ArrayList<String>) : RecyclerView.Adapter<NewsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news,parent,false)
+
+        view.setOnClickListener {
+
+        }
+        return NewsViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -17,11 +23,16 @@ class NewsListAdapter(val items: ArrayList<String>) : RecyclerView.Adapter<NewsV
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = items[position]
+        holder.titleView.text = currentItem
     }
 
 }
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleView: TextView = itemView.findViewById(R.id.title)
+}
+
+interface NewsItemClicked {
+    fun onItemClicked(item:String)
 }
