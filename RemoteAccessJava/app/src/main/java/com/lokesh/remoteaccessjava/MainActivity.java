@@ -21,13 +21,15 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("adnan", "on create");
         checkForSmsReceivePermissions();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String address = extras.getString("address");
             String message = extras.getString("message");
+            Log.d("adnan", extras.getString("address"));
+            Log.d("adnan", extras.getString("message"));
             TextView addressField = (TextView) findViewById(R.id.address);
             TextView messageField = (TextView) findViewById(R.id.message);
             addressField.setText(address);
