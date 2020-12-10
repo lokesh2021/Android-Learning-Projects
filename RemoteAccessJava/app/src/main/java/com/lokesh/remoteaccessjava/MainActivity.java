@@ -6,49 +6,60 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private static final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS = 0;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //check if the permission is granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            //if permission is denied then check if the user has denied the permission
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECEIVE_SMS)) {
-                //Do nothing as user has denied
-            } else {
-                //a popup will appear for required permission  i.e allow or Deny
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_RECEIVE_SMS);
 
-            }
+        checkForSmsReceivePermissions();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String address = extras.getString("address");
+            String message = extras.getString("message");
+            TextView addressField = (TextView) findViewById(R.id.address);
+            TextView messageField = (TextView) findViewById(R.id.message);
+            addressField.setText(address);
+            Log.d("adnan", address);
+            messageField.setText(message);
+            Log.d("adnan", message);
         }
-    }//onCreate
-    //after getting the result of permission requests the result will be passed through this method
 
+    }
+
+    void checkForSmsReceivePermissions(){
+        // Check if App already has permissions for receiving SMS
+        if(ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.RECEIVE_SMS") == PackageManager.PERMISSION_GRANTED) {
+            // App has permissions to listen incoming SMS messages
+            Log.d("adnan", "checkForSmsReceivePermissions: Allowed");
+        } else {
+            // App don't have permissions to listen incoming SMS messages
+            Log.d("adnan", "checkForSmsReceivePermissions: Denied");
+
+            // Request permissions from user
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECEIVE_SMS}, 43391);
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode)
-        {
-            case MY_PERMISSIONS_REQUEST_RECEIVE_SMS :
-            {
-                //check whether the length of grantResults is greater than 0 and is equal to PERMISSION_GRANTED
-                if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
-                {
-                    Toast.makeText(this, "Permissions Permitted", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 43391){
+            if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.d("adnan", "Sms Receive Permissions granted");
+            } else {
+                Log.d("adnan", "Sms Receive Permissions denied");
             }
         }
     }
