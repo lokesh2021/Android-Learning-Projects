@@ -2,13 +2,12 @@ package com.lokesh.nativenews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.JsonRequest
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NewsItemClicked {
@@ -20,21 +19,25 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
         setContentView(R.layout.activity_main)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+        Log.d("logd", "oncreate")
         fetchData()
         mAdapter = NewsListAdapter(this)
         recyclerView.adapter = mAdapter
     }
 
     private fun fetchData() {
-        val url = "http://newsapi.org/v2/top-headlines?country=in&apiKey=0e344f1cad2447d8bddcf28c8fcdea80"
+        val url = "http://newsapi.org/v2/top-headlines?country=in&apiKey=0e344f1cad2447d8bddcf28c8fcdea80/"
+        Log.d("logd", "fetch data")
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener {
                 val newsJsonArray = it.getJSONArray("articles")
+                Log.d("logd", "Response.Listener")
                 val newsArray = ArrayList<News>()
                 for (i in 0 until newsJsonArray.length()) {
+                    Log.d("logd", "listener for loop")
                     val newsJsonObject = newsJsonArray.getJSONObject(i)
                     val news = News(
                         newsJsonObject.getString("title"),

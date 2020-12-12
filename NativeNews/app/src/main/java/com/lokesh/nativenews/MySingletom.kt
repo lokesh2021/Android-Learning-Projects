@@ -1,12 +1,7 @@
-package com.lokesh.nativenews
-
 import android.content.Context
-import android.graphics.Bitmap
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.Volley
-import com.bumptech.glide.util.LruCache
 
 class MySingleton constructor(context: Context) {
     companion object {
@@ -20,12 +15,11 @@ class MySingleton constructor(context: Context) {
             }
     }
 
-    val requestQueue: RequestQueue by lazy {
+    private val requestQueue: RequestQueue by lazy {
         // applicationContext is key, it keeps you from leaking the
         // Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
     }
-
     fun <T> addToRequestQueue(req: Request<T>) {
         requestQueue.add(req)
     }
